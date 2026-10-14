@@ -3,7 +3,7 @@
 # Maintainer: Zhanibek Adilbekov <zhanibek.adilbekov@pm.me>
 # shellcheck disable=SC2034,2164,2154
 pkgname=auto-cpufreq
-pkgver=3.1.0
+pkgver=3.2.0
 pkgrel=1
 pkgdesc="Automatic CPU speed & power optimizer"
 arch=('any')
@@ -18,21 +18,18 @@ source=(
 	"$pkgname-$pkgver.tar.gz::$url/archive/v$pkgver.tar.gz"
 	"$pkgname.service"
 	"001-fix-icon-n-style-locations.patch"
-	"002-fix-other-icon-path.patch"
 )
 
 prepare() {
 	cd "$srcdir/$pkgname-$pkgver"
 	sed -i 's|usr/local|usr|g' "scripts/${pkgname}.service" auto_cpufreq/core.py
 	patch --strip=2 --input=../001-fix-icon-n-style-locations.patch
-	patch --strip=2 --input=../002-fix-other-icon-path.patch
 
 }
 
-sha256sums=('c843a90f59ce47bcfc320bfc8b75044946cfd2f02b714fb10d06a911dcf78bc5'
+sha256sums=('55ec8091d3c70ece552d48d668d1c6f940ad71a6e2df2fae9b45c67c2f870b93'
             '8ff1c82788f7cb6bf06151e6632aa4006eb09337daf03faa4866d23075b39e1b'
-            '227d85df7f71187c87e24388104f0127b13a680c1e859a90a14864a0d29e1fdf'
-            '9c06cba2d936aa325fac8f4306ef77e4f5e33ec4703112bb8352097d0b13abfe')
+            '227d85df7f71187c87e24388104f0127b13a680c1e859a90a14864a0d29e1fdf')
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
